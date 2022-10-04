@@ -1,7 +1,13 @@
 
 #################### BASIC DATA STRUCTURE ####################
 
-class Person:
+
+
+
+from datetime import datetime
+
+
+class User:
     """
     Person class
     description: class for person
@@ -10,8 +16,8 @@ class Person:
     ----------
     personId : int 
         unique id number for each person
-    name : str
-        the name of the animal
+    username : str
+        username
     email : str
         user's email
     password : str
@@ -23,17 +29,79 @@ class Person:
     
     Methods
     -------
-    method(params)
-        short description
+    method() -> type
+        description
+    getUserame() -> str
+        get Username
+    setUsername(username) -> None
+        set Username
+    getEmail() -> str
+        get email
+    setEmail(email) -> None
+        set email
+    getPassword() -> str
+        get password
+    setPassword(password) -> None
+        set password
+    getDob() -> Date (class)
+        get DOB
+    setDob(date) -> None
+        set DOB
+    getGender() -> str
+        get gender
+    setGender(gender) -> None
+        set gender
     """
     
-    def __init__(self, name, email, password, dob, gender) -> None:
+    def __init__(self, username, email, password, dob, gender) -> None:
         self.personId = "someID"  # need to change
-        self.name = name
+        self.username = username
         self.email = email
         self.password = password
         self.dob = dob
         self.gender = gender
+
+    def getUsername(self) -> str:
+        return self.username
+
+    def setUsername(self, username) -> None:
+        self.username = username
+
+    def getEmail(self) -> str:
+        return self.email
+
+    def setEmail(self, email) -> None:
+        self.email = email
+    
+    def getPassword(self) -> str:
+        return self.password
+
+    def setPassword(self, password) -> None:
+        self.password = password
+    
+    def getDob(self) -> datetime:
+        return self.dob
+
+    def setDob(self, dob) -> None:
+        self.dob = dob
+    
+    def getGender(self) -> str:
+        return self.gender
+
+    def setGender(self, gender) -> None:
+        self.gender = gender
+    
+    # toString
+    def __str__(self):
+        return f"""
+        id : {self.personId}
+        name : {self.getUsername()}
+        email : {self.getEmail()}
+        password : {self.getPassword()}
+        dob : {self.getDob()}
+        gender : {self.getGender()}
+        """
+        
 
 
 class Event:
@@ -57,7 +125,7 @@ class Event:
         unique id number for each event
     name : str
         the name of the calendar
-    person : Person (class)
+    own : User (class)
         person who created the group
     startTime: Date (class)
         start time of the event
@@ -80,10 +148,10 @@ class Event:
     BEGIN = 2000
     END = 2200
 
-    def __init__(self, name, person, startTime, endTime, location, description, creationDate):
+    def __init__(self, name, user, startTime, endTime, location, description, creationDate):
         self.id = "someId"  # need change
         self.name = name
-        self.own = person.getName()   # creator
+        self.own = user.getId()   # creator
         self.startTime = startTime
         self.endTime = endTime
         self.location = location
@@ -125,7 +193,7 @@ class IndividualCalendar:
     ----------
     calendarId : int 
         unique id number for each group calendar
-    person : Person (class)
+    own : User (class)
         person who created the group
     schedule: Schedule (class)
         user's schedule
@@ -138,9 +206,9 @@ class IndividualCalendar:
     method(params)
         short description
     """
-    def __init__(self, person, schedule, creationDate ):
+    def __init__(self, user, schedule, creationDate ):
         self.calendarId = "someId" # need to change
-        self.own = person.getId()  # creator
+        self.own = user.getId()  # creator
         self.schedule = schedule
         self.creationDate = creationDate
 
@@ -156,7 +224,7 @@ class GroupCalendar:
         unique id number for each group calendar
     name : str
         the name of the calendar
-    person : Person (class)
+    own : User (class)
         person who created the group
     schedules: list
         list of each individuals schedule
@@ -171,10 +239,24 @@ class GroupCalendar:
     method(params)
         short description
     """
-    def __init__(self, name, person, schedules, members, creationDate ):
+    def __init__(self, name, user, schedules, members, creationDate ):
         self.calendarId = "someId" # need to change
         self.name = name
-        self.own = person.getId()
+        self.own = user.getId()
         self.schedules = schedules 
         self.members = members
         self.creationDate = creationDate
+
+
+if __name__ == "__main__":
+
+    # testing person class
+    name = "Stones"
+    email = "stones123@canisius.edu"
+    password = "password123"
+    dob = datetime(1990, 1, 1)
+    gender = "male"
+
+    user1 = User(name, email, password, dob, gender)
+
+    print(user1)
