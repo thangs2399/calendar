@@ -1,0 +1,4 @@
+include capp/schema.sql
+graft capp/static
+graft capp/templates
+global=exclude *.pyc

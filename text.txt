@@ -1,0 +1,9 @@
+
+
+
+// install requirements
+pip install -e .
+
+
+// run flask
+flask --app capp --degbug run
