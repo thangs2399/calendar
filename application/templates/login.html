@@ -1,0 +1,31 @@
+{% extends "boilerplate.html" %}
+{% block main %}
+
+<div>
+    <h1 style="color:black">Log In</h1> 
+    <form id="log-in-form" method="POST" action="loginHandler.php">
+        <div class="input-div">
+            <input type="text" id="username" name="username" placeholder="username" required>
+        </div>
+        <div class="input-div">
+            <input type="password" id="password" name="password" placeholder="password" required>
+        </div>
+
+        <div id="login"> 
+            <input type="submit" value="Log In">
+        </div>
+
+    </form>
+
+    <hr>
+
+    <a href="" style="text-decoration:none;">
+        <button id="signup-button">Sign Up</button>
+    </a>
+    <a href="" style="text-decoration:none;">
+        <button id="changePW-button">Forgot Password</button>
+    </a>
+</div>
+
+{% endblock %}
+
