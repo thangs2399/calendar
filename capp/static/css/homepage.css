@@ -11,8 +11,8 @@ main {
 #mini-header-calendar {
     width: 100%;
     justify-content: space-around;
-    margin-top: 50px;
-    margin-bottom: 100px;
+    margin-top: 20px;
+    margin-bottom: 60px;
 }
 
 
@@ -54,6 +54,7 @@ main {
     height: 560px;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(7, 1fr);
+    margin-bottom: 30px;
 }
 
 
