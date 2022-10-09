@@ -5,5 +5,10 @@
 pip install -e .
 
 
+// initialize database
+flask --app capp init-db
+
 // run flask
 flask --app capp --degbug run
+
+
