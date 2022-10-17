@@ -1,0 +1,82 @@
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+
+
+#mini-header-calendar {
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+
+#calendarView > ul, #calendarType > ul {
+    text-decoration: none;
+    list-style: none;
+    padding-left: 0;
+}
+
+#calendarView > ul button, #calendarType > ul button {
+    margin: 0 5px 0 5px;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+#calendarView > ul button:hover, #calendarType > ul button:hover {
+
+    background-color: var(--buttonH1);
+    cursor: pointer;
+}
+
+
+#currentDate button {
+    border-radius: 3px;
+    margin: 0px 5px 0px 5px;
+    width: 30px;
+    height: 30px;
+}
+
+#currentDate button:hover {
+    background-color: var(--buttonH1);
+    cursor: pointer;
+}
+
+#calendar {
+    display: grid;
+    width: 1050px;
+    height: 560px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    margin-bottom: 30px;
+}
+
+
+.calendarGrid {
+    background-color: var(--bgColor1);
+    border: 1px solid black;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.calendarGrid:hover {
+    background-color: var(--buttonH1);
+    cursor: pointer;
+}
+
+
+#addEventButton {
+    position: absolute;
+    right: 100px;
+    bottom: 50px;
+}
+
+#addEventButton {
+    cursor: pointer;
+}
