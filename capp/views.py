@@ -54,7 +54,7 @@ def profile():
             'SELECT username, email FROM users WHERE user_id = ?', (user_id,)
         ).fetchone()
 
-    return render_template('profile.html', username = user["username"], email = user["email"])
+    return render_template('profile.html', username = user["username"] , email = user["email"])
 
 
 

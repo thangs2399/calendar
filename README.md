@@ -4,15 +4,17 @@
 
 #### MacOS/Linux
 ```python
- python3 -m venv venv   # create virtual environment
- . venv/bin/activate    # activate virtual environment
- pip install -e .       # install requirements/dependencies
+ python3 -m venv venv               # create virtual environment
+ . venv/bin/activate                # activate virtual environment
+ pip install --upgrade pip          # upgrade pip
+ pip install -r requirements.txt    # install requirements/dependencies
 ```
 #### Windows
 ```python
- py -3 -m venv venv        # create virtual environment
- venv\Scripts\activate     # activate virtual environment
- pip install -e .          # install requirements/dependencies
+ py -3 -m venv venv                         # create virtual environment
+ venv\Scripts\activate                      # activate virtual environment
+ pip install --upgrade pip                  # upgrade pip
+ pip install -r requirements.txt            # install requirements/dependencies
 ```
 
 
