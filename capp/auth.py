@@ -1,7 +1,7 @@
 
 #################### IMPORTS ####################
 
-# 1
+
 import functools
 
 from flask import (
@@ -9,12 +9,11 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-# 2
 from capp.db import get_db
 
 
 
-#################### BLUEPRINTS ####################
+#################### BLUEPRINTS ( AUTH ) ####################
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
