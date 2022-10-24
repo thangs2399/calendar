@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/login.css">
+    <title>Log In</title>
+</head>
+<body class="flex">
+    <main>
+        <div id="description">
+            <h1>App Name</h1>
+            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper sit amet erat nec rutrum. Etiam ut sem varius, laoreet magna eu, gravida augue. Nunc sit amet vehicula metus.</h4>
+        </div>
+
+        <div id="login-form">
+
+            <h1>Log In</h1>
+            
+            <form method="POST">
+                <div class="input-div">
+                    <input type="text" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-div">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+        
+                <div id="login"> 
+                    <input type="submit" value="Log In">
+                </div>
+        
+            </form>
+        
+            <hr>
+
+            <a href="/auth/signup" style="text-decoration:none;">
+                <button id="signup-button">Sign Up</button>
+            </a>
+            <a href="/auth/resetPassword" style="text-decoration:none;">
+                <button id="changePW-button">Forgot Password</button>
+            </a>
+        </div>  
+    </main>
+
+    <!-- footer -->
+    <footer class="flex"><div>&copy;Syntax Error</div></footer>
+</body>
+</html>
