@@ -2,8 +2,11 @@
 
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, g
+from flask_mail import Mail, Message
 
+
+mail = Mail()
 
 
 #################### App Factory ####################
@@ -17,6 +20,13 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'capp.sqlite'),
+
+        MAIL_SERVER = 'smtp.gmail.com',
+        MAIL_PORT = 465,
+        MAIL_USERNAME = 'slmthang23@gmail.com',
+        MAIL_PASSWORD = 'hftboizpsgplbsas',
+        MAIL_USE_TLS = False,
+        MAIL_USE_SSL = True,
     )
 
     if test_config is None:
@@ -33,6 +43,9 @@ def create_app(test_config=None):
         pass
 
 
+    ############### EXTENSIONS ###############
+
+    initialize_extensions(app) # for mailing, 
 
     ############### DATABASE ###############
 
@@ -57,3 +70,23 @@ def create_app(test_config=None):
     ########################################
 
     return app # return the app
+
+
+
+
+def email():
+    """
+        > store "mail instance" to g and returns it
+    """
+    if "ml" not in g:
+
+        g.ml = mail
+    
+    return g.ml
+
+
+def initialize_extensions(app):
+    """
+        for extensions
+    """
+    mail.init_app(app)

@@ -7,7 +7,8 @@ from flask import Blueprint, request, render_template, session, g, redirect
 import functools
 from capp.db import get_db
 from capp.actions import sessionExists
-
+from capp import email
+from flask_mail import Message
 
 ############################## VIEWS ##############################
 
@@ -73,12 +74,26 @@ def gorups():
 
 ############### HELP ###############
 
-@views.route("/help")
+@views.route("/help", methods=["GET", "POST"])
 def help():
 
     if (not sessionExists()):
 
         return redirect("/auth/login")
+
+    if (request.method == "POST"):
+
+        user_email = request.form["email"]
+        user_message = request.form["message"]
+
+        message = Message( "FlaskApp Help - " + user_email , sender = user_email, recipients = ['slmthang23@gmail.com'])
+        message.body = "\n\nFrom: " + user_email + "\n\n\n" + "Message:\n\n" + user_message 
+
+        mail = email()
+
+        mail.send(message)
+
+        return render_template('help-sent.html')
 
     return render_template('help.html')
 
