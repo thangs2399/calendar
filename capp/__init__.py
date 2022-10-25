@@ -21,12 +21,12 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'capp.sqlite'),
 
-        MAIL_SERVER = 'smtp.gmail.com',
-        MAIL_PORT = 465,
-        MAIL_USERNAME = 'slmthang23@gmail.com',
-        MAIL_PASSWORD = 'hftboizpsgplbsas',
-        MAIL_USE_TLS = False,
-        MAIL_USE_SSL = True,
+        MAIL_SERVER = 'smtp.mailtrap.io',
+        MAIL_PORT = 2525,
+        MAIL_USERNAME = 'd19730111e48c1',
+        MAIL_PASSWORD = '740057642c9d6a',
+        MAIL_USE_TLS = True,
+        MAIL_USE_SSL = False,
     )
 
     if test_config is None:
