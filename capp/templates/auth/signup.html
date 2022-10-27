@@ -17,19 +17,23 @@
             <form method="POST">
 
                 <div class="input-div">
-                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    <input type="text" id="username" name="username" placeholder="Username" required minlength="4">
                 </div>
                 <div class="input-div">
-                    <input type="text" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="input-div">
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="Password requires minimum 8 characters that contains at least one uppercase, lowercase, and a number">
                 </div>
                 <div class="input-div">
-                    <input type="text" id="dob" name="dob" placeholder="DOB : YYYY-MM-DD" required>
+                    <input type="date" id="dob" name="dob" placeholder="DOB : YYYY-MM-DD" required>
                 </div>
                 <div class="input-div">
-                    <input type="text" id="gender" name="gender" placeholder="Gender" required>
+                    <select type="text" id="gender" name="gender" placeholder="Gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
         
                 <div id="login"> 

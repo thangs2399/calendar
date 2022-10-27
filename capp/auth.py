@@ -82,9 +82,9 @@ def login():
         ).fetchone()
 
         if user is None:
-            error = 'Incorrect username.'
+            return render_template("auth/login-failed.html")
         elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
+            return render_template("auth/login-failed.html")
 
         if error is None:
             session.clear()
@@ -152,6 +152,8 @@ def verification():
 
 
     return render_template("auth/2fa.html")
+
+
 
 ##### LOG OUT #####
 @auth.route('/logout')

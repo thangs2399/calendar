@@ -18,12 +18,14 @@
 
             <h1>Log In</h1>
             
+            {% block eMessage %} {% endblock %}
+
             <form method="POST">
                 <div class="input-div">
-                    <input type="text" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="input-div">
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <input type="password" id="password" name="password" placeholder="Password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="Password requires minimum 8 characters that contains at least one uppercase, lowercase, and a number">
                 </div>
         
                 <div id="login"> 
