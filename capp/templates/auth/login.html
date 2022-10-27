@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/login.css">
+    <script src="../../static/scripts/actions.js" defer></script>
     <title>Log In</title>
 </head>
 <body class="flex">
@@ -28,6 +29,8 @@
                     <input type="password" id="password" name="password" placeholder="Password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="Password requires minimum 8 characters that contains at least one uppercase, lowercase, and a number">
                 </div>
         
+                <input type="checkbox" onclick="showPassword()">
+
                 <div id="login"> 
                     <input type="submit" value="Log In">
                 </div>
