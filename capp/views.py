@@ -86,7 +86,7 @@ def help():
         user_email = request.form["email"]
         user_message = request.form["message"]
 
-        message = Message( "FlaskApp Help", sender = user_email, recipients = ['CSC395'])
+        message = Message( "FlaskApp Help", sender = user_email, recipients = ['capp.supp2022@gmail.com', 'slmthang23@gmail.com', 'thangs@my.canisius.edu'])
         message.body = user_message 
 
         mail = email()

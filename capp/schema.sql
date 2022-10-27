@@ -7,8 +7,10 @@ CREATE TABLE users (
   email VARCHAR(100) UNIQUE NOT NULL,
   password VARCHAR(100) NOT NULL,
   dob DATE,
-  gender VARCHAR(100)
+  gender VARCHAR(100),
+  code INTEGER
 );
+
 
 CREATE TABLE events (
   event_id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -10,8 +10,10 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from capp.db import get_db
+from capp import email
+from flask_mail import Message
 
-
+import random
 
 #################### BLUEPRINTS ( AUTH ) ####################
 
@@ -86,13 +88,70 @@ def login():
 
         if error is None:
             session.clear()
-            session['user_id'] =  user['user_id']
-            return redirect("/")
+            session['user'] =  user['user_id']
+            return redirect("/auth/verification")
 
         flash(error)
 
-    return render_template('auth/login.html')
+    return render_template("auth/login.html")
 
+
+@auth.route("/verification", methods=('GET', 'POST'))
+def verification():
+    """
+        -> send verification code to user's email
+        -> user put in the code
+        -> take user to homepage if successful, else back to login page
+    """
+    db = get_db()
+
+
+    if (request.method == "POST"):
+
+        entered_code = request.form["vcode"]
+        
+        user_info = db.execute(
+            'SELECT * FROM users WHERE user_id = ?', (session["user"],)
+        ).fetchone()
+
+        actual_code = user_info["code"]
+
+        # if entered code matches, redirect to homepage
+        if str(entered_code) == str(actual_code):
+
+            session['user_id'] =  user_info['user_id']
+
+            return redirect("/")
+
+        else:
+
+            return redirect("/auth/login")
+
+
+    # fetch user's email from database
+    user = db.execute(
+        'SELECT * FROM users WHERE user_id = ?', (session["user"],)
+    ).fetchone()
+
+    user_email = user["email"]
+
+    # generate random code
+    code = random.randint(10000,100000)
+
+    # store the code in the database
+    db.execute(
+        "UPDATE users SET code = ? WHERE user_id = ?", (code, session["user"])
+    )
+    db.commit()
+
+    # send verification code
+    message = Message( "Verification Code for CAPP", sender = 'capp.supp2022@gmail.com', recipients = ['capp.supp2022@gmail.com', user_email])
+    message.body = str(code)
+    mail = email()
+    mail.send(message)
+
+
+    return render_template("auth/2fa.html")
 
 ##### LOG OUT #####
 @auth.route('/logout')
