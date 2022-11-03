@@ -1,0 +1,38 @@
+
+
+form {
+    background-color: lightblue;
+    width: 500px;
+    height: px;
+    flex-direction: column;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="text"], 
+input[type="date"],
+input[type="time"]{
+    width: 400px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 5px;
+}
+/***************  **********************/
+input[type="submit"] {
+    background-color: #1877F2;
+    font-size: large;
+    font-weight: bold;
+    color: white;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+form > * {
+
+    margin: 15px 0px 15px 0px;
+}
