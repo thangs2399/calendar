@@ -1,9 +1,16 @@
+body {
+    background: linear-gradient(to top right, white, lightgreen);
+}
 
+.close {
+    font-size: 100;
+    font-weight: 700;
+}
 
 form {
-    background-color: lightblue;
+    background: white;
     width: 500px;
-    height: px;
+    height: 750px;
     flex-direction: column;
 }
 
@@ -16,6 +23,7 @@ form {
 input[type="text"], 
 input[type="date"],
 input[type="time"]{
+    font-size: medium;
     width: 400px;
     height: 50px;
     padding: 10px;
@@ -23,7 +31,7 @@ input[type="time"]{
 }
 /***************  **********************/
 input[type="submit"] {
-    background-color: #1877F2;
+    background-color: #74c947;
     font-size: large;
     font-weight: bold;
     color: white;
