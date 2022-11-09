@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  capp:
+    build: ./app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    
+  mysql:
+    build: ./mysql
+    restart: always
+    ports:
+      - "4000:3306"
+    environment:
+      MYSQL_USER: capp
+      MYSQL_PASSWORD: red781
+      MYSQL_ROOT_PASSWORD: red781
+      MYSQL_DATABASE: capp
