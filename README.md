@@ -1,4 +1,5 @@
-# Installation Guide
+# Installation Guide for CAPP
+
 
 ## Using Python Virutal Environment
 
@@ -10,6 +11,8 @@
  pip install -r requirements.txt                # install requirements/dependencies
  flask --app capp --debug run --host=0.0.0.0    # run the app
 ```
+
+
 #### Windows
 ```python
  py -3 -m venv venv                             # create virtual environment
@@ -21,13 +24,36 @@
 
 
 
-
 ## Using Docker
+```
+########## capp image ##########
 
-#### build
-> sudo docker build -t capp:latest .
-#### run
-> sudo docker run -p 5000:5000 capp:latest
+# build capp image
+sudo docker build -t capp:latest .
 
+# create container and run
+sudo docker run -p 5000:5000 capp:latest
+
+
+########## mysql image ##########
+
+# build capp image
+sudo docker build -t mysqlDB:latest .
+
+# create container and run
+sudo docker run -p 4000:3306 --name mysqlDB -e MYSQL_ROOT_PASSWORD=red781 -d mysqlDB:latest
+
+
+########## docker compose ##########
+
+# build
+sudo docker-compose build
+
+# run
+sudo docker-compose up
+
+# stop
+sudo docker-compose down
+```
 
 ---
