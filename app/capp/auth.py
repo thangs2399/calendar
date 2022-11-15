@@ -4,18 +4,21 @@
 
 from cmath import log
 import functools
+import random
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from werkzeug.security import check_password_hash, generate_password_hash
-
-from capp import email
-from flask_mail import Message
+from werkzeug.security import (
+    check_password_hash, generate_password_hash
+)
 from capp.actions import (
     createAccount, loginAccount, sendVcode, updateUserPassword, existEmail
 )
-import random
+from capp import email
+from flask_mail import Message
+
+
 
 #################### BLUEPRINTS ( AUTH ) ####################
 
@@ -104,7 +107,6 @@ def loginVerify():
         # if entered code matches, redirect to homepage
         if str(entered_code) == str(actual_code):
 
-            session["user_id"] = session["user"]["user_id"]
             return redirect("/") # homepage
 
         else:
@@ -155,6 +157,7 @@ def resetPassword1():
             flash("Verification code sent!", "s-message")
 
         # store user's email for password reset purpose
+        # *need this*
         session["rp-email"] = user_email
 
         return redirect("/auth/rp/confirm") 

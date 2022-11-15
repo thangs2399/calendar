@@ -41,11 +41,11 @@ def create_app(test_config=None):
 
         #################### MYSQL CONFIG ####################
 
-        MYSQL_HOST = 'mysql',
+        MYSQL_HOST = '127.0.0.1',
         MYSQL_USER = 'root',
         MYSQL_PASSWORD = 'red781',
         MYSQL_DB = 'capp',
-        MYSQL_PORT = 3306,
+        MYSQL_PORT = 4000,
         MYSQL_CURSORCLASS = 'DictCursor' # return rows as dictionary
 
         ############################################################

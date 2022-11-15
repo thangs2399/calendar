@@ -101,7 +101,7 @@ body > div {
 
 /* main */
 main {
-    background: linear-gradient(to right top, grey, lightgrey);
+    background: linear-gradient(to top right, rgb(165, 165, 165), lightgreen);
 }
 
 

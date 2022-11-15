@@ -11,6 +11,8 @@ from capp import email, mysql
 import random
 from flask_mail import Message
 import datetime
+import calendar
+import pymongo
 
 #######################################################
 
@@ -323,7 +325,7 @@ def updateUserPassword(email : str, newPassword : str) -> Boolean:
         # Saving the Actions performed on the DB
         mysql.connection.commit()
 
-    except e:
+    except:
 
         return False
 
@@ -333,3 +335,10 @@ def updateUserPassword(email : str, newPassword : str) -> Boolean:
         cursor.close()
 
     return True
+
+
+def getMongoDB():
+
+    client = pymongo.MongoClient("mongodb+srv://root:red781@capp.7ecgh3z.mongodb.net/?retryWrites=true&w=majority")
+
+    return client.capp

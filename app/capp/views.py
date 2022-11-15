@@ -1,42 +1,132 @@
 
 ############################## IMPORTS ##############################
 
-# 1
-from xmlrpc.client import Boolean
-from flask import Blueprint, request, render_template, session, g, redirect, flash
+# from xmlrpc.client import Boolean # delete ???
 import functools
 
-from capp.actions import sessionExists, sendEmail
-from capp import email, mysql
+
+import datetime
+from calendar import monthrange
 from flask_mail import Message
+
+from flask import (
+    Blueprint, request, render_template, session,redirect, flash
+)
+
+from capp.actions import (
+    sessionExists, sendEmail, getMongoDB
+)
+
+from capp.calendarStuff import (
+    calendarInfo, Event, getEventDates, addEvent, getEventsCurMonth
+)
+
+from capp import email, mysql
+
+
 
 ############################## VIEWS ##############################
 
 views = Blueprint("views", __name__)
 
+the_calendar = calendarInfo() # calendarInfo object to instore calendar information
 
 
 ############### HOMEPAGE/Calendar ###############
 
 @views.route("/")
-@views.route("/calendar-monthly")
-def homepage():
+def homepage1():
 
     if (not sessionExists()):
 
         return redirect("/auth/login")
 
-    return render_template("homepage.html")
+    # get data needed to build calendar and to fetch events from mongo
+    data = the_calendar.getData()
 
-@views.route("/calendar-weekly")
-def weeklyView():
-    return "weekly view"
+    # events collection of the user
+    events_col = getEventsCurMonth(session['user']['username'], datetime.datetime(data['year'], data['month'], data['day']))
 
-@views.route("/calendar-daily")
-def dailyView():
-    return "daily view"
+    # list of events to mark on calendar
+    eventList = getEventDates(events_col)
+
+    return render_template("homepage.html", data = data, events = eventList)
+    
+
+@views.route("/1")
+def homepage2():
+
+    if (not sessionExists()):
+
+        return redirect("/auth/login")
+
+    the_calendar.nextMonth()
+
+    # get data needed to build calendar and to fetch events from mongo
+    data = the_calendar.getData()
+
+    # events collection of the user
+    events_col = getEventsCurMonth(session['user']['username'], datetime.datetime(data['year'], data['month'], data['day']))
+
+    # list of events to mark on calendar
+    eventList = getEventDates(events_col)
+
+    return render_template("homepage.html", data = data, events = eventList)
 
 
+@views.route("/2")
+def homepage3():
+
+    if (not sessionExists()):
+
+        return redirect("/auth/login")
+
+    the_calendar.prevMonth()
+    
+    # get data needed to build calendar and to fetch events from mongo
+    data = the_calendar.getData()
+
+    # events collection of the user
+    events_col = getEventsCurMonth(session['user']['username'], datetime.datetime(data['year'], data['month'], data['day']))
+
+    # list of events to mark on calendar
+    eventList = getEventDates(events_col)
+
+    return render_template("homepage.html", data = data, events = eventList)
+
+
+############### EVENTS ################
+
+@views.route("/cevent", methods=('GET', 'POST'))
+def cevent():
+    """
+        > where events are created and manage storing them in mongoDB
+    """
+    if (not sessionExists()):
+
+        return redirect("/auth/login")
+
+    
+    if (request.method == "POST"):
+
+        eventName = request.form["eventName"]
+        [sdate, stime] = request.form['sdate'].split("T")
+        [edate, etime] = request.form['edate'].split("T")
+        [sy, sm, sd] = str(sdate).split("-") # y-m-d
+        [shr, smin] = str(stime).split(":") # h:m
+        [ey, em, ed] = str(edate).split("-")
+        [ehr, emin] = str(etime).split(":")
+        location = request.form["location"]
+        description = request.form["description"]
+
+        event = Event(str(eventName), datetime.datetime(int(sy), int(sm), int(sd), int(shr), int(smin)), datetime.datetime(int(ey), int(em), int(ed), int(ehr), int(emin)), location, description)
+
+        addEvent(session['user']['username'], event)
+
+        return redirect('/')
+
+    return render_template("addEvent.html")
+        
 
 ############### PROFILE ###############
 
