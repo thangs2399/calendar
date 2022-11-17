@@ -345,3 +345,12 @@ def getMongoDB():
     client = pymongo.MongoClient(f"mongodb+srv://{os.getenv('MONGO_USER')}:{os.getenv('MONGO_PASS')}@capp.7ecgh3z.mongodb.net/?retryWrites=true&w=majority")
 
     return client.capp
+
+def extractTime(someDateTime):
+
+    time = someDateTime.split(" ")[1]
+
+    time = time.split(":")
+
+    return time[0] + ":" + time[1]
+    
