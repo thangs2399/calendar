@@ -342,6 +342,6 @@ def getMongoDB():
     """
         > returns mongoDB database
     """
-    client = pymongo.MongoClient(f"mongodb+srv://root:{os.getenv('MONGO_PASS')}@capp.7ecgh3z.mongodb.net/?retryWrites=true&w=majority")
+    client = pymongo.MongoClient(f"mongodb+srv://{os.getenv('MONGO_USER')}:{os.getenv('MONGO_PASS')}@capp.7ecgh3z.mongodb.net/?retryWrites=true&w=majority")
 
     return client.capp

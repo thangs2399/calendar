@@ -31,8 +31,8 @@ def create_app(test_config=None):
         
         MAIL_SERVER = 'smtp.gmail.com',
         MAIL_PORT = 465,
-        MAIL_USERNAME = 'capp.supp2022@gmail.com',
-        MAIL_PASSWORD = os.getenv('GMAIL_PASS'),
+        MAIL_USERNAME = os.getenv('EMAIL'),
+        MAIL_PASSWORD = os.getenv('EMAIL_PASS'),
         MAIL_USE_TLS = False,
         MAIL_USE_SSL = True,
 
@@ -42,7 +42,7 @@ def create_app(test_config=None):
         #################### MYSQL CONFIG ####################
 
         MYSQL_HOST = '127.0.0.1',
-        MYSQL_USER = 'root',
+        MYSQL_USER = os.getenv('MYSQL_USER'),
         MYSQL_PASSWORD = os.getenv('MYSQL_PASS'),
         MYSQL_DB = 'capp',
         MYSQL_PORT = 4000,
