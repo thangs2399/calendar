@@ -43,17 +43,25 @@
                 {% if (x+data['startDay'])%7==5 or (x+data['startDay'])%7==6 %}
                     {% if data['currentYear']==data['year'] and data['currentMonth']==data['month'] and x == data['currentDay'] - 1 %}
                         {% if events[[data['year'], data['month'], x + 1]|join("")] %}
-                            <div class="calendarGrid currentDay flex" style="color: red">*{{x + 1}}*</div>
+                            <div class="calendarGrid currentDay flex" id="{{data['year']}}-{{data['month']}}-{{x+1}}" onclick="dayClicked(this)">
+                                <div class="mini-grid flex fe"><div class="indicator"></div></div>
+                                <div class="mini-grid flex">{{x + 1}}</div>
+                                <div class="mini-grid"></div>
+                            </div>
                         {% else %}
-                            <div class="calendarGrid currentDay flex">{{x + 1}}</div>
+                            <div class="calendarGrid currentDay flex" id="{{data['year']}}-{{data['month']}}-{{x+1}}" onclick="dayClicked(this)">{{x + 1}}</div>
                         {% endif %}
                         
                     {% else %} 
                         
                         {% if events[[data['year'], data['month'], x + 1]|join("")] %}
-                            <div class="calendarGrid weekendBlock flex" style="color: red">*{{x + 1}}*</div>
+                            <div class="calendarGrid weekendBlock flex" id="{{data['year']}}-{{data['month']}}-{{x+1}}" onclick="dayClicked(this)">
+                                <div class="mini-grid flex fe"><div class="indicator"></div></div>
+                                <div class="mini-grid flex">{{x + 1}}</div>
+                                <div class="mini-grid"></div>
+                            </div>
                         {% else %}
-                            <div class="calendarGrid weekendBlock flex">{{x + 1}}</div>
+                            <div class="calendarGrid weekendBlock flex" id="{{data['year']}}-{{data['month']}}-{{x+1}}" onclick="dayClicked(this)">{{x + 1}}</div>
                         {% endif %}
                     {% endif %}
                 
@@ -61,16 +69,24 @@
                     
                     {% if data['currentYear']==data['year'] and data['currentMonth']==data['month'] and x == data['currentDay'] - 1 %}
                         {% if events[[data['year'], data['month'], x + 1]|join("")] %}
-                            <div class="calendarGrid currentDay flex" style="color: red">*{{x + 1}}*</div>
+                            <div class="calendarGrid currentDay flex" id="{{data['year']}}-{{data['month']}}-{{x+1}}" onclick="dayClicked(this)">
+                                <div class="mini-grid flex fe"><div class="indicator"></div></div>
+                                <div class="mini-grid flex">{{x + 1}}</div>
+                                <div class="mini-grid"></div>
+                            </div>
                         {% else %}
-                            <div class="calendarGrid currentDay flex">{{x + 1}}</div>
+                            <div class="calendarGrid currentDay flex" id="{{data['year']}}-{{data['month']}}-{{x+1}}" onclick="dayClicked(this)">{{x + 1}}</div>
                         {% endif %}
                         
                     {% else %} 
                         {% if events[[data['year'], data['month'], x + 1]|join("")] %}
-                            <div class="calendarGrid dayBlock flex" style="color: red">*{{x + 1}}*</div>
+                            <div class="calendarGrid dayBlock flex" id="{{data['year']}}-{{data['month']}}-{{x+1}}" onclick="dayClicked(this)">
+                                <div class="mini-grid flex fe"><div class="indicator"></div></div>
+                                <div class="mini-grid flex">{{x + 1}}</div>
+                                <div class="mini-grid"></div>
+                            </div>
                         {% else %}
-                            <div class="calendarGrid dayBlock flex">{{x + 1}}</div>
+                            <div class="calendarGrid dayBlock flex" id="{{data['year']}}-{{data['month']}}-{{x+1}}" onclick="dayClicked(this)">{{x + 1}}</div>
                         {% endif %}
                         
                     {% endif %}

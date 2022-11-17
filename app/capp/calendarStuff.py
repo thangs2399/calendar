@@ -2,7 +2,7 @@ import calendar
 from calendar import monthrange
 import datetime
 from capp.actions import getMongoDB
-
+import pymongo
 
 
 class calendarInfo:
@@ -226,3 +226,16 @@ def getEventsCurMonth(username : str, curDate : datetime) -> dict:
     endDate = datetime.datetime(int(curDate.year), int(curDate.month), int(lastDayOfMonth))
 
     return col.find({ "startTime" : {"$gte": startDate, "$lte": endDate}})
+
+
+def getEventDay(username : str, curDate : datetime) -> dict:
+
+    db = getMongoDB()
+
+    col = db[username]
+
+    startDate = datetime.datetime(int(curDate.year), int(curDate.month), int(curDate.day), 0)
+    endDate = datetime.datetime(int(curDate.year), int(curDate.month), int(curDate.day) + 1, 0)
+
+    return col.find({ "startTime" : {"$gte": startDate, "$lte": endDate}}).sort("startTime", 1)
+

@@ -23,3 +23,9 @@ function removeFlash() {
         x.remove()
     }, 3000)
 }
+
+
+// remove flashedMessage
+const dayClicked = (element) => {
+    window.location ="/devo" + "?date=" + element.id
+}

@@ -14,17 +14,17 @@ from flask import (
 )
 
 from capp.actions import (
-    sessionExists, sendEmail, getMongoDB
+    sessionExists, sendEmail, extractTime
 )
 
 from capp.calendarStuff import (
-    calendarInfo, Event, getEventDates, addEvent, getEventsCurMonth
+    calendarInfo, Event, getEventDates, addEvent, getEventsCurMonth, getEventDay
 )
 
 from capp import email, mysql
 
-
-
+from bson import json_util
+import json
 ############################## VIEWS ##############################
 
 views = Blueprint("views", __name__)
@@ -37,16 +37,17 @@ the_calendar = calendarInfo() # calendarInfo object to instore calendar informat
 @views.route("/")
 def homepage1():
 
-    if (not sessionExists()):
+    # if (not sessionExists()):
 
-        return redirect("/auth/login")
+    #     return redirect("/auth/login")
 
     # get data needed to build calendar and to fetch events from mongo
     data = the_calendar.getData()
 
     # events collection of the user
-    events_col = getEventsCurMonth(session['user']['username'], datetime.datetime(data['year'], data['month'], data['day']))
-
+    # events_col = getEventsCurMonth(session['user']['username'], datetime.datetime(data['year'], data['month'], data['day']))
+    events_col = getEventsCurMonth('slm', datetime.datetime(data['year'], data['month'], data['day']))
+   
     # list of events to mark on calendar
     eventList = getEventDates(events_col)
 
@@ -56,9 +57,9 @@ def homepage1():
 @views.route("/1")
 def homepage2():
 
-    if (not sessionExists()):
+    # if (not sessionExists()):
 
-        return redirect("/auth/login")
+    #     return redirect("/auth/login")
 
     the_calendar.nextMonth()
 
@@ -66,7 +67,8 @@ def homepage2():
     data = the_calendar.getData()
 
     # events collection of the user
-    events_col = getEventsCurMonth(session['user']['username'], datetime.datetime(data['year'], data['month'], data['day']))
+    # events_col = getEventsCurMonth(session['user']['username'], datetime.datetime(data['year'], data['month'], data['day']))
+    events_col = getEventsCurMonth('slm', datetime.datetime(data['year'], data['month'], data['day']))
 
     # list of events to mark on calendar
     eventList = getEventDates(events_col)
@@ -77,9 +79,9 @@ def homepage2():
 @views.route("/2")
 def homepage3():
 
-    if (not sessionExists()):
+    # if (not sessionExists()):
 
-        return redirect("/auth/login")
+    #     return redirect("/auth/login")
 
     the_calendar.prevMonth()
     
@@ -87,7 +89,8 @@ def homepage3():
     data = the_calendar.getData()
 
     # events collection of the user
-    events_col = getEventsCurMonth(session['user']['username'], datetime.datetime(data['year'], data['month'], data['day']))
+    # events_col = getEventsCurMonth(session['user']['username'], datetime.datetime(data['year'], data['month'], data['day']))
+    events_col = getEventsCurMonth('slm', datetime.datetime(data['year'], data['month'], data['day']))
 
     # list of events to mark on calendar
     eventList = getEventDates(events_col)
@@ -102,9 +105,9 @@ def cevent():
     """
         > where events are created and manage storing them in mongoDB
     """
-    if (not sessionExists()):
+    # if (not sessionExists()):
 
-        return redirect("/auth/login")
+    #     return redirect("/auth/login")
 
     
     if (request.method == "POST"):
@@ -133,9 +136,9 @@ def cevent():
 @views.route("/profile")
 def profile():
 
-    if (not sessionExists()):
+    # if (not sessionExists()):
 
-        return redirect("/auth/login")
+    #     return redirect("/auth/login")
 
     # get username and email from session
     username = session["user"]["username"]
@@ -150,9 +153,9 @@ def profile():
 @views.route("/groups")
 def gorups():
 
-    if (not sessionExists()):
+    # if (not sessionExists()):
 
-        return redirect("/auth/login")
+    #     return redirect("/auth/login")
 
     return render_template('groups.html')
 
@@ -163,9 +166,9 @@ def gorups():
 @views.route("/help", methods=["GET", "POST"])
 def help():
 
-    if (not sessionExists()):
+    # if (not sessionExists()):
 
-        return redirect("/auth/login")
+    #     return redirect("/auth/login")
 
     if (request.method == "POST"):
 
@@ -203,6 +206,32 @@ def settings():
 
 
 
+def parse_json(data):
+    return json.loads(json_util.dumps(data))
+
+@views.route("/devo")
+def devo():
+
+    date = request.args["date"]
+    # month = request.args["month"]
+    # day = request.args["day"]
+
+    [y, m, d] = date.split("-")
+    events_col = getEventDay('slm', datetime.datetime(int(y), int(m), int(d)))
+
+    eventz = {}
+
+    for i in events_col:
+        i['_id'] = str(i['_id']) # turns ObjectID to str
+        st = datetime.datetime.strptime(extractTime(str(i['startTime'])), "%H:%M")
+        et = datetime.datetime.strptime(extractTime(str(i['endTime'])), "%H:%M")
+        i['startTime'] = st.strftime("%I:%M %p")
+        i['endTime'] = et.strftime("%I:%M %p")
+        eventz[i['_id']] = i
+
+    # return str(de)
+
+    return render_template('displayEvents.html', eventDict=eventz, date = date)
 
 # PAGE NOT FOUND
 @views.errorhandler(404)
