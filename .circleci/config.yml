@@ -1,0 +1,31 @@
+version: 2
+
+jobs:
+
+  build:
+
+    working_directory: /go/src/github.com/slmthang23/csc395-group-project
+  
+    docker:
+      - image: cimg/base:2022.11
+
+    steps:
+      - checkout
+      - setup_remote_docker
+
+    - run: 
+        name: Setup environment
+        command: |
+        export EMAIL='capp.supp2022@gmail.com' MYSQL_USER='root' MONGO_USER='root' EMAIL_PASS='gbmvlzxviioohyer' MYSQL_PASS='red781' MONGO_PASS='red781'
+       
+    - run:
+        name: Build images of services declared in docker-compose.yml
+        command: docker-compose build
+
+    - run:
+        name: Start all services declared in docker-compose.yml
+        command: docker-compose up -d
+
+    - run:
+        name: Verify Services
+        command: docker ps
