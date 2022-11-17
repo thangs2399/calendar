@@ -23,6 +23,27 @@
 ```
 
 
+## Setting and Getting Environment Variables
+
+#### MacOS/Linux
+```
+# Setting an Environment Variable
+export API_KEY = '123abc'
+
+# Getting an Enviroment Variable
+os.getenv('API_KEY')
+```
+
+
+#### Windows
+```
+# Setting an Environment Variable
+set API_KEY = '123abc'
+
+# Getting an Enviroment Variable
+os.getenv('API_KEY')
+```
+
 
 ## Using Docker
 ```
