@@ -18,22 +18,22 @@ jobs:
           command: |
             export EMAIL='capp.supp2022@gmail.com' MYSQL_USER='root' MONGO_USER='root' EMAIL_PASS='gbmvlzxviioohyer' MYSQL_PASS='red781' MONGO_PASS='red781'
        
-      # - run:
-      #     name: Build images of services declared in docker-compose.yml
-      #     command: docker-compose build
-
-      # - run:
-      #     name: Start all services declared in docker-compose.yml
-      #     command: docker-compose up -d
-
-      # - run:
-      #     name: Verify Services
-      #     command: docker ps
+      - run:
+          name: Build images of services declared in docker-compose.yml
+          command: docker-compose build
 
       - run:
-          name: ls
-          command: ls
+          name: Start all services declared in docker-compose.yml
+          command: docker-compose up -d
 
       - run:
-          name: pwd
-          command: pwd
+          name: Verify Services
+          command: docker ps
+
+      # - run:
+      #     name: ls
+      #     command: ls
+
+      # - run:
+      #     name: pwd
+      #     command: pwd
