@@ -16,7 +16,7 @@ jobs:
       - run: 
           name: Setup environment
           command: |
-          export EMAIL='capp.supp2022@gmail.com' MYSQL_USER='root' MONGO_USER='root' EMAIL_PASS='gbmvlzxviioohyer' MYSQL_PASS='red781' MONGO_PASS='red781'
+            export EMAIL='capp.supp2022@gmail.com' MYSQL_USER='root' MONGO_USER='root' EMAIL_PASS='gbmvlzxviioohyer' MYSQL_PASS='red781' MONGO_PASS='red781'
        
       - run:
           name: Build images of services declared in docker-compose.yml
