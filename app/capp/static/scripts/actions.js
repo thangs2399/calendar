@@ -27,5 +27,5 @@ function removeFlash() {
 
 // remove flashedMessage
 const dayClicked = (element) => {
-    window.location ="/devo" + "?date=" + element.id
+    window.location ="/displayEvents" + "?date=" + element.id
 }
