@@ -4,7 +4,7 @@ jobs:
 
   build:
 
-    working_directory: /go/src/github.com/slmthang23/csc395-group-project
+    working_directory: ~/capp-home/github.com/slmthang23/csc395-group-project
   
     docker:
       - image: cimg/base:2022.11
