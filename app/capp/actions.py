@@ -13,6 +13,7 @@ from flask_mail import Message
 import datetime
 import calendar
 import pymongo
+import os
 
 #######################################################
 
@@ -338,7 +339,9 @@ def updateUserPassword(email : str, newPassword : str) -> Boolean:
 
 
 def getMongoDB():
-
-    client = pymongo.MongoClient("mongodb+srv://root:red781@capp.7ecgh3z.mongodb.net/?retryWrites=true&w=majority")
+    """
+        > returns mongoDB database
+    """
+    client = pymongo.MongoClient(f"mongodb+srv://root:{os.getenv('MONGO_PASS')}@capp.7ecgh3z.mongodb.net/?retryWrites=true&w=majority")
 
     return client.capp
