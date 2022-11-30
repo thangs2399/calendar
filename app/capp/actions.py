@@ -158,7 +158,7 @@ def createAccount(username : str, email : str, password : str, dob : str, gender
 
     except Exception as e:
 
-        return False
+        return e
 
     finally:
 

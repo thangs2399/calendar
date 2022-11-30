@@ -18,7 +18,7 @@ CREATE TABLE users (
   email VARCHAR(100) UNIQUE NOT NULL,
   password VARCHAR(500) NOT NULL,
   dob DATE,
-  gender VARCHAR(100),
+  gender VARCHAR(100)
 );
 
 
@@ -35,4 +35,4 @@ CREATE TABLE events (
   FOREIGN KEY (owner) REFERENCES users (user_id)
 );
 
-INSERT INTO users VALUES( 0, "slm", "slmthang99@gmail.com", "password1", "2011-01-01", "male", 466);
+INSERT INTO users VALUES( 0, "slm", "slmthang99@gmail.com", "password1", "2011-01-01", "male");

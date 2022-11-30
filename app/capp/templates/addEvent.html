@@ -3,14 +3,14 @@
 
 <form id="addEvent-form" class="flex" method="post">
     <div><h1>Add Event</h1></div>
-    <div><input type="text" placeholder="Event Name" name="eventName" id="eventName"></div>
+    <div><input type="text" placeholder="Event Name" name="eventName" id="eventName" required></div>
     <div>
         <label>From:</label><br>
-        <input type="datetime-local" name="sdate" id="sdate">
+        <input type="datetime-local" name="sdate" id="sdate" required>
     </div>
     <div>
         <label>To:</label><br>
-        <input type="datetime-local" name="edate" id="edate">
+        <input type="datetime-local" name="edate" id="edate" required>
     </div>
     <div><input type="text" placeholder="Location" name="location" id="location"></div>
     

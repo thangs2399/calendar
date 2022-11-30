@@ -1,5 +1,5 @@
 venv/
-.env
+env.txt
 *.pyc
 __pycache__/
 
