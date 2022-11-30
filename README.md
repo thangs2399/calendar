@@ -47,24 +47,6 @@ os.getenv('API_KEY')
 
 ## Using Docker
 ```
-########## capp image ##########
-
-# build capp image
-sudo docker build -t capp:latest .
-
-# create container and run
-sudo docker run -p 5000:5000 capp:latest
-
-
-########## mysql image ##########
-
-# build mysql image
-sudo docker build -t mysqldb:latest .
-
-# create container and run
-sudo docker run -p 4000:3306 --name mysqldb -e MYSQL_ROOT_PASSWORD=red781 -d mysqldb:latest
-
-
 ########## docker compose ##########
 
 # build
