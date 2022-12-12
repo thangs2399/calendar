@@ -25,7 +25,22 @@ function removeFlash() {
 }
 
 
-// remove flashedMessage
+// day clicked
 const dayClicked = (element) => {
     window.location ="/displayEvents" + "?date=" + element.id
+}
+
+// event clicked
+const eventClicked = (element) => {
+    window.location ="/ve" + "?eidd=" + element.id
+}
+
+// delete event
+const delEvent = (element) => {
+    window.location ="/de" + "?eid=" + element.id
+}
+
+// edit event
+const modEvent = (element) => {
+    window.location ="/mode" + "?eid=" + element.id
 }

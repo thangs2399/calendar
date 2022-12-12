@@ -18,7 +18,7 @@ from capp.actions import (
 )
 
 from capp.calendarStuff import (
-    calendarInfo, Event, getEventDates, addEvent, getEventsCurMonth, getEventDay
+    calendarInfo, Event, getEventDates, addEvent, getEventsCurMonth, getEventDay, getEvent, deleteEvent
 )
 
 from capp import email, mysql
@@ -228,6 +228,76 @@ def displayEvents():
 
     return render_template('displayEvents.html', eventDict=eventz, date = date)
 
+# View Event
+@views.route("/ve")
+def ve():
+
+    if (not sessionExists()):
+
+        return redirect("/auth/login")
+
+    eidd = request.args["eidd"] # event ID + date
+
+    [eid, date] = eidd.split("date")
+
+    event = getEvent(session['user']['username'], str(eid))
+
+    st = datetime.datetime.strptime(extractTime(str(event['startTime'])), "%H:%M")
+    et = datetime.datetime.strptime(extractTime(str(event['endTime'])), "%H:%M")
+    
+    event['startTime'] = st.strftime("%I:%M %p")
+    event['endTime'] = et.strftime("%I:%M %p")
+
+    return render_template('viewEvent.html', event=event, eventid=eid, date=date, eid=eid)
+
+# modify Event
+@views.route("/mode", methods=["GET", "POST"])
+def mode():
+
+    if (not sessionExists()):
+
+        return redirect("/auth/login")
+
+    if (request.method == "POST"):
+
+        eventName = request.form["eventName"]
+        [sdate, stime] = request.form['sdate'].split("T")
+        [edate, etime] = request.form['edate'].split("T")
+        [sy, sm, sd] = str(sdate).split("-") # y-m-d
+        [shr, smin] = str(stime).split(":") # h:m
+        [ey, em, ed] = str(edate).split("-")
+        [ehr, emin] = str(etime).split(":")
+        location = request.form["location"]
+        description = request.form["description"]
+
+        event = Event(str(eventName), datetime.datetime(int(sy), int(sm), int(sd), int(shr), int(smin)), datetime.datetime(int(ey), int(em), int(ed), int(ehr), int(emin)), location, description)
+
+        addEvent(session['user']['username'], event)
+
+        return redirect('/')
+
+    eid = request.args["eid"] # event ID
+
+    event = getEvent(session['user']['username'], str(eid)) # fetch event
+
+    deleteEvent(session['user']['username'], eid) # delete event
+
+    return render_template('modEvent.html', event=event)
+
+
+# delete Event
+@views.route("/de")
+def de():
+
+    if (not sessionExists()):
+
+        return redirect("/auth/login")
+
+    eid = request.args["eid"] # event ID
+
+    deleteEvent(session['user']['username'], str(eid)) # delete event
+
+    return redirect("/")
 
 
 # PAGE NOT FOUND

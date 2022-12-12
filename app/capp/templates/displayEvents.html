@@ -7,7 +7,7 @@
 
     <div id="events">
         {% for k,v in eventDict.items() %}
-        <div class="event {{k}} flex">
+        <div class="event flex" id="{{k}}date{{date}}" onclick="eventClicked(this)">
                 <div class="eventName flex">{{v['eventName']}}</div>
                 <div class="eventTime flex">{{v['startTime']}} - {{v['endTime']}}</div>
         </div>

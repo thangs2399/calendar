@@ -28,19 +28,19 @@
     </div>
     
     <div id="calendar">
+        <div class="calendarGrid headerBlock flex">Sunday</div>
         <div class="calendarGrid headerBlock flex">Monday</div>
         <div class="calendarGrid headerBlock flex">Tuesday</div>
         <div class="calendarGrid headerBlock flex">Wednesday</div>
         <div class="calendarGrid headerBlock flex">Thursday</div>
         <div class="calendarGrid headerBlock flex">Friday</div>
         <div class="calendarGrid headerBlock flex">Saturday</div>
-        <div class="calendarGrid headerBlock flex">Sunday</div>
         {% block calendarDays %}
             {% for x in range(data['startDay']) %}
             <div class="calendarGrid emptyBlock flex"></div>
             {% endfor %}
             {% for x in range(data['cBuild']['mb']) %}
-                {% if (x+data['startDay'])%7==5 or (x+data['startDay'])%7==6 %}
+                {% if (x+data['startDay'])%7==0 or (x+data['startDay'])%7==6 %}
                     {% if data['currentYear']==data['year'] and data['currentMonth']==data['month'] and x == data['currentDay'] - 1 %}
                         {% if events[[data['year'], data['month'], x + 1]|join("")] %}
                             <div class="calendarGrid currentDay flex" id="{{data['year']}}-{{data['month']}}-{{x+1}}" onclick="dayClicked(this)">

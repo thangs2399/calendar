@@ -4,6 +4,8 @@ import datetime
 from capp.actions import getMongoDB
 import pymongo
 
+# importing ObjectId from bson library
+from bson.objectid import ObjectId
 
 class calendarInfo:
 
@@ -213,6 +215,16 @@ def addEvent(username: str, event: Event) -> None:
 
     col.insert_one(event.getFormattedData())
 
+def updateEvent(username: str, event: Event, eventID: str) -> None:
+    """
+        > update event
+    """
+    db = getMongoDB()
+
+    col = db[username]
+
+    col.update_one({'_id': ObjectId(eventID)}, { "$set" : event.getFormattedData() } )
+
 
 def getEventsCurMonth(username : str, curDate : datetime) -> dict:
 
@@ -229,7 +241,9 @@ def getEventsCurMonth(username : str, curDate : datetime) -> dict:
 
 
 def getEventDay(username : str, curDate : datetime) -> dict:
-
+    """
+        return collection of events on a given datetime
+    """
     db = getMongoDB()
 
     col = db[username]
@@ -239,3 +253,23 @@ def getEventDay(username : str, curDate : datetime) -> dict:
 
     return col.find({ "startTime" : {"$gte": startDate, "$lte": endDate}}).sort("startTime", 1)
 
+
+def getEvent(username : str, eventID: str) -> dict:
+    """
+        return event usingthe eventID
+    """
+    db = getMongoDB()
+
+    col = db[username]
+
+    return col.find_one(ObjectId(eventID))
+
+def deleteEvent(username : str, eventID: str) -> None:
+    """
+        delete event
+    """
+    db = getMongoDB()
+
+    col = db[username]
+
+    col.delete_one({'_id': ObjectId(eventID)})

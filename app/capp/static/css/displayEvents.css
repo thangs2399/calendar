@@ -29,6 +29,11 @@
     flex-direction: column;
 }
 
+#events > div:hover {
+    border: 2px rgb(40, 255, 40) solid;
+    cursor: pointer;
+}
+
 .eventName {
     width: 200px;
     height: 35px;
