@@ -4,9 +4,9 @@
     flex-direction: column;
 }
 
-input[type="text"], 
-input[type="date"],
-input[type="datetime-local"]{
+.eventz input[type="text"], 
+.eventz input[type="date"],
+.eventz input[type="datetime-local"]{
     font-size: medium;
     width: 400px;
     height: 40px;
