@@ -3,6 +3,12 @@
 ## Summary 
 > It is a web based calendar app that provides an interactive calendar where users can create, manage and see all of their calendar data across all devices,and all in one place. This app will make the user’s lives a lot easier as it allows them to organize and plan their days with ease. The main goal of this application is to provide a user-friendly calendar app that can be used by any ages and assist them in managing thier lives better.
 
+## Languages and Tools
+> - HTML, CSS, JavaScripts (front-end)
+> - Flask/Python (back-end)
+> - MySql and MongoDB (Databases)
+> - Docker
+
 ## Features:
 > - Clean and User Friendly UI
 > - Interactive Calendar
