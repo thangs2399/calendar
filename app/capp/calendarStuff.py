@@ -249,7 +249,7 @@ def getEventDay(username : str, curDate : datetime) -> dict:
     col = db[username]
 
     startDate = datetime.datetime(int(curDate.year), int(curDate.month), int(curDate.day), 0)
-    endDate = datetime.datetime(int(curDate.year), int(curDate.month), int(curDate.day) + 1, 0)
+    endDate = datetime.datetime(int(curDate.year), int(curDate.month), int(curDate.day), 0)
 
     return col.find({ "startTime" : {"$gte": startDate, "$lte": endDate}}).sort("startTime", 1)
 
