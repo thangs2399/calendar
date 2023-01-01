@@ -32,6 +32,6 @@
 > Users can fill this form for feedbacks and questions.   
 
 ## Run the app using docker-compose
-'''
+```
 $ sudo docker-compose up
-'''
+```
